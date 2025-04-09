@@ -44,7 +44,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/node-web-gpio-e2e/**/*"]
+      "exclude": ["apps/node-web-gpio-e2e/**/*", "apps/node-web-i2c-e2e/**/*"]
     }
   ],
   "targetDefaults": {
