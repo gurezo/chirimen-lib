@@ -1,22 +1,19 @@
-const baseConfig = require('../../.eslintrc.json');
-
-module.exports = [
-  ...baseConfig,
-  {
-    files: ['**/*.json'],
-    rules: {
-      '@nx/dependency-checks': [
-        'error',
-        {
-          ignoredFiles: [
-            '{projectRoot}/eslint.config.{js,cjs,mjs}',
-            '{projectRoot}/vite.config.{js,ts,mjs,mts}',
-          ],
-        },
-      ],
+module.exports = {
+  root: true,
+  extends: ['../../.eslintrc.json'],
+  ignorePatterns: ['!**/*'],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
+      rules: {},
     },
-    languageOptions: {
-      parser: require('jsonc-eslint-parser'),
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {},
     },
-  },
-];
+    {
+      files: ['*.js', '*.jsx'],
+      rules: {},
+    },
+  ],
+};

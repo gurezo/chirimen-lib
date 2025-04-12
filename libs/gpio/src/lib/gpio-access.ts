@@ -1,13 +1,13 @@
 import { GPIOPortMap } from './gpio-port-map';
 
 export class GPIOAccess {
-  constructor(private readonly ports: GPIOPortMap) {}
+  constructor(private readonly _ports: GPIOPortMap) {}
 
   public port(portNumber: number) {
-    return this.ports.get(portNumber);
+    return this._ports.get(portNumber);
   }
 
-  public ports() {
-    return this.ports;
+  public getAllPorts() {
+    return this._ports;
   }
 }
