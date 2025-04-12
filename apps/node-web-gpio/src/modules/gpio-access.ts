@@ -1,13 +1,30 @@
 import { EventEmitter } from 'node:events';
-import { GPIOPort } from './gpio-port';
-import { GPIOChangeEvent, GPIOChangeEventHandler, PortNumber } from './types';
+import {
+  GPIOChangeEvent,
+  GPIOChangeEventHandler,
+  IGPIOPort,
+  PortNumber,
+} from './types';
+
+/**
+ * Different from Web GPIO API specification.
+ */
+export class GPIOPortMap extends Map<PortNumber, IGPIOPort> {
+  /**
+   * Creates an instance of GPIOPortMap.
+   * @param entries ポートエントリ
+   */
+  constructor(entries?: Iterable<[PortNumber, IGPIOPort]>) {
+    super(entries);
+  }
+}
 
 /**
  * GPIO
  */
 export class GPIOAccess extends EventEmitter {
   /** ポート */
-  private readonly _ports: Map<PortNumber, GPIOPort>;
+  private readonly _ports: GPIOPortMap;
   /** GPIO チェンジイベントハンドラ */
   onchange: GPIOChangeEventHandler | undefined;
 
@@ -15,20 +32,16 @@ export class GPIOAccess extends EventEmitter {
    * Creates an instance of GPIOAccess.
    * @param ports ポート番号
    */
-  constructor(ports?: Map<PortNumber, GPIOPort>) {
+  constructor(ports?: GPIOPortMap) {
     super();
 
-    this._ports = ports == null ? new Map() : ports;
+    this._ports = ports == null ? new GPIOPortMap() : ports;
     // biome-ignore lint/complexity/noForEach:
-    this._ports.forEach((port) => {
-      port.on('change', (event: GPIOChangeEvent) => {
-        const portEvent: GPIOChangeEvent = {
-          value: event.value,
-          portNumber: event.portNumber,
-        };
-        this.emit('change', portEvent);
-      });
-    });
+    this._ports.forEach((port) =>
+      port.on('change', (event) => {
+        this.emit('change', event);
+      })
+    );
 
     this.on('change', (event: GPIOChangeEvent): void => {
       if (this.onchange !== undefined) this.onchange(event);
@@ -39,7 +52,7 @@ export class GPIOAccess extends EventEmitter {
    * ポート情報取得処理
    * @return 現在のポート情報
    */
-  get ports(): Map<PortNumber, GPIOPort> {
+  get ports(): GPIOPortMap {
     return this._ports;
   }
 

@@ -8,7 +8,7 @@ export class InvalidAccessError extends Error {
    */
   constructor(message: string) {
     super(message);
-    this.name = this.constructor.name;
+    this.name = 'InvalidAccessError';
   }
 }
 
@@ -22,6 +22,6 @@ export class OperationError extends Error {
    */
   constructor(message: string) {
     super(message);
-    this.name = this.constructor.name;
+    this.name = 'OperationError';
   }
 }

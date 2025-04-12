@@ -6,22 +6,21 @@ import {
   DirectionMode,
   GPIOChangeEvent,
   GPIOChangeEventHandler,
+  GpioOffset,
   GPIOValue,
+  IGPIOPort,
+  parseUint16,
+  PinName,
+  PollingInterval,
   PortName,
   PortNumber,
-} from './types';
-import {
-  GpioOffset,
-  PollingInterval,
   SysfsGPIOPath,
-  parseUint16,
-  sleep,
-} from './utils';
+} from './types';
 
 /**
  * GPIO ポート
  */
-export class GPIOPort extends EventEmitter {
+export class GPIOPort extends EventEmitter implements IGPIOPort {
   /** ポート番号 */
   private readonly _portNumber: PortNumber;
   /** ポーリング間隔 */
@@ -77,7 +76,7 @@ export class GPIOPort extends EventEmitter {
    * ピン名取得処理
    * @return 現在のピン名
    */
-  get pinName(): string {
+  get pinName(): PinName {
     // NOTE: Unknown pinName.
     return '';
   }
@@ -136,96 +135,77 @@ export class GPIOPort extends EventEmitter {
           this._pollingInterval
         );
       }
-      // biome-ignore lint/suspicious/noExplicitAny:
-    } catch (error: any) {
-      if (this._exportRetry < 10) {
-        await sleep(100);
-        console.warn('May be the first time port access. Retry..');
-        ++this._exportRetry;
-        await this.export(direction);
-      } else {
-        throw new OperationError(error);
-      }
+      this._direction = direction;
+      this._exported = true;
+    } catch (error) {
+      this._exported = false;
+      throw new OperationError(
+        `Failed to export GPIO port ${this.portNumber}: ${error}`
+      );
     }
-
-    this._direction = direction;
-    this._exported = true;
   }
 
   /**
-   * Unexport exported GPIO ports.
-   * ポート開放をする
-   * @return ポート開放処理の完了
+   * GPIO 出力解除処理
+   * @return unexport 処理の完了
    */
   async unexport(): Promise<void> {
-    clearInterval(this._timeout as ReturnType<typeof setInterval>);
-
     try {
-      await fs.writeFile(
-        path.join(SysfsGPIOPath, 'unexport'),
-        String(this.portNumber)
+      clearInterval(this._timeout as ReturnType<typeof setInterval>);
+      if (this.exported) {
+        await fs.writeFile(
+          path.join(SysfsGPIOPath, 'unexport'),
+          String(this.portNumber)
+        );
+      }
+      this._exported = false;
+    } catch (error) {
+      throw new OperationError(
+        `Failed to unexport GPIO port ${this.portNumber}: ${error}`
       );
-      // biome-ignore lint/suspicious/noExplicitAny:
-    } catch (error: any) {
-      throw new OperationError(error);
     }
-
-    this._exported = false;
   }
 
   /**
-   * 入力値読み取り処理
-   * @return 読み取り処理の完了
+   * GPIO 読み込み処理
+   * @return GPIO 値
    */
   async read(): Promise<GPIOValue> {
-    if (!(this.exported && this.direction === 'in')) {
-      throw new InvalidAccessError(
-        `The exported must be true and value of direction must be "in".`
-      );
-    }
-
     try {
-      const buffer = await fs.readFile(
-        path.join(SysfsGPIOPath, this.portName, 'value')
+      const value = await fs.readFile(
+        path.join(SysfsGPIOPath, this.portName, 'value'),
+        'utf8'
       );
-
-      const value = parseUint16(buffer.toString()) as GPIOValue;
-
-      if (this._value !== value) {
-        this._value = value;
-        const event: GPIOChangeEvent = {
-          value,
-          portNumber: this.portNumber,
-        };
-        this.emit('change', event);
+      const newValue = Number.parseInt(value.trim(), 10) as GPIOValue;
+      if (this._value !== newValue) {
+        this._value = newValue;
+        this.emit('change', { value: newValue, port: this });
       }
-
-      return value;
-      // biome-ignore lint/suspicious/noExplicitAny:
-    } catch (error: any) {
-      throw new OperationError(error);
+      return newValue;
+    } catch (error) {
+      throw new OperationError(
+        `Failed to read GPIO port ${this.portNumber}: ${error}`
+      );
     }
   }
 
   /**
-   * 出力値書き込み処理
-   * @return 読み取り処理の完了
+   * GPIO 書き込み処理
+   * @param value GPIO 値
+   * @return write 処理の完了
    */
   async write(value: GPIOValue): Promise<void> {
-    if (!(this.exported && this.direction === 'out')) {
-      throw new InvalidAccessError(
-        `The exported must be true and value of direction must be "out".`
-      );
-    }
-
     try {
       await fs.writeFile(
         path.join(SysfsGPIOPath, this.portName, 'value'),
-        parseUint16(value.toString()).toString()
+        String(value)
       );
-      // biome-ignore lint/suspicious/noExplicitAny:
-    } catch (error: any) {
-      throw new OperationError(error);
+      this._value = value;
+      this.emit('change', { value, port: this });
+    } catch (error) {
+      throw new OperationError(
+        `Failed to write GPIO port ${this.portNumber}: ${error}`
+      );
     }
   }
 }

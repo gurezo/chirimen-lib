@@ -1,19 +1,19 @@
-import { GPIOAccess } from './gpio-access';
-import { GPIOPort } from './gpio-port';
-import { PortNumber } from './types';
-import { GPIOPortMapSizeMax } from './utils';
+import { GPIOAccess, GPIOPortMap } from './modules/gpio-access';
+import { GPIOPort } from './modules/gpio-port';
+import { sleep } from './modules/types';
 
-// Web GPIOの仕様に基づく意図的なasync関数の使用なので、ルールを無効化
-// eslint-disable-next-line
+/**
+ * GPIO アクセス要求処理
+ * @return GPIO アクセス
+ */
 export async function requestGPIOAccess(): Promise<GPIOAccess> {
-  const ports = new Map<PortNumber, GPIOPort>(
-    [...Array(GPIOPortMapSizeMax).keys()].map((portNumber) => [
-      portNumber,
-      new GPIOPort(portNumber),
-    ])
-  );
+  const ports = new GPIOPortMap();
+  const access = new GPIOAccess(ports);
 
-  return new GPIOAccess(ports);
+  // NOTE: For testing.
+  await sleep(100);
+
+  return access;
 }
 
 export { GPIOAccess, GPIOPort };
