@@ -1,6 +1,8 @@
+const baseConfig = require('../../.eslintrc.json');
+
 module.exports = {
+  ...baseConfig,
   root: true,
-  extends: ['../../.eslintrc.json'],
   ignorePatterns: ['!**/*'],
   overrides: [
     {
