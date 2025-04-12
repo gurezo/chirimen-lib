@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "ignorePatterns": ["apps/polyfill/src/polyfill.js"],
+  "plugins": ["@nx"],
+  "extends": [
+    "plugin:@nx/typescript",
+    "plugin:@nx/javascript"
+  ]
+}
