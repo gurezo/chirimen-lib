@@ -1,6 +1,5 @@
-import { GPIOAccess, GPIOPortMap } from './modules/gpio-access';
-import { GPIOPort } from './modules/gpio-port';
-import { sleep } from './modules/types';
+import { GPIOAccess, GPIOPort, GPIOPortMap } from '@chirimen-lib/gpio';
+import { sleep } from '@chirimen-lib/shared';
 
 /**
  * GPIO アクセス要求処理

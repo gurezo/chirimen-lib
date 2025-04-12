@@ -1,16 +1,18 @@
-import { I2CAccess } from './modules/i2c-access';
-import { I2CPort } from './modules/i2c-port';
-import { I2CPortMap } from './modules/i2c-port-map';
-import { I2CSlaveDevice } from './modules/i2c-slave-device';
-import { OperationError } from './modules/operation-error';
+import {
+  I2CAccess,
+  I2CPort,
+  I2CPortMap,
+  I2CSlaveDevice,
+} from '@chirimen-lib/i2c';
 import {
   I2CPortMapSizeMax,
   I2CSlaveAddress,
+  OperationError,
+  parseUint16,
   PortName,
   PortNumber,
   Uint16Max,
-} from './modules/types';
-import { parseUint16 } from './modules/utils';
+} from '@chirimen-lib/shared';
 
 // Web I2Cの仕様に基づく意図的なasync関数の使用なので、ルールを無効化
 // eslint-disable-next-line
@@ -25,6 +27,8 @@ export async function requestI2CAccess(): Promise<I2CAccess> {
   return new I2CAccess(ports);
 }
 
+export type { PortName, PortNumber };
+
 export {
   I2CAccess,
   I2CPort,
@@ -34,7 +38,5 @@ export {
   I2CSlaveDevice,
   OperationError,
   parseUint16,
-  PortName,
-  PortNumber,
   Uint16Max,
 };

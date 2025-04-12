@@ -1,7 +1,7 @@
 {
-  "name": "@chirimen/shared",
+  "name": "@chirimen-lib/shared",
   "version": "0.1.0",
-  "type": "commonjs",
+  "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {},

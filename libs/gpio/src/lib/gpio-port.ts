@@ -1,4 +1,4 @@
-import { OperationError } from '@chirimen/shared';
+import { OperationError } from '@chirimen-lib/shared';
 
 export type GPIODirection = 'in' | 'out';
 export type GPIOValue = 0 | 1;
