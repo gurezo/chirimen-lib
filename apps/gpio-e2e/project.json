@@ -1,17 +1,17 @@
 {
-  "name": "node-web-i2c-e2e",
+  "name": "chirimen-gpio-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "implicitDependencies": ["node-web-i2c"],
+  "implicitDependencies": ["chirimen-gpio"],
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/node-web-i2c-e2e/jest.config.ts",
+        "jestConfig": "apps/gpio-e2e/jest.config.ts",
         "passWithNoTests": true
       },
-      "dependsOn": ["node-web-i2c:build"]
+      "dependsOn": ["gpio:build"]
     }
   }
 }

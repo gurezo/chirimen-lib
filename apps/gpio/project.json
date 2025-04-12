@@ -1,7 +1,7 @@
 {
-  "name": "node-web-i2c",
+  "name": "chirimen-gpio",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/node-web-i2c/src",
+  "sourceRoot": "apps/gpio/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,12 +11,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/node-web-i2c",
+        "outputPath": "dist/apps/gpio",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/node-web-i2c/src/main.ts",
-        "tsConfig": "apps/node-web-i2c/tsconfig.app.json",
-        "assets": ["apps/node-web-i2c/src/assets"],
+        "main": "apps/gpio/src/main.ts",
+        "tsConfig": "apps/gpio/tsconfig.app.json",
+        "assets": ["apps/gpio/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -42,15 +42,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "node-web-i2c:build",
+        "buildTarget": "gpio:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "node-web-i2c:build:development"
+          "buildTarget": "gpio:build:development"
         },
         "production": {
-          "buildTarget": "node-web-i2c:build:production"
+          "buildTarget": "gpio:build:production"
         }
       }
     },

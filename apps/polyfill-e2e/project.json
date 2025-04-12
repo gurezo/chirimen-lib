@@ -4,7 +4,7 @@
   "sourceRoot": "apps/polyfill-e2e/src",
   "projectType": "application",
   "tags": [],
-  "implicitDependencies": ["polyfill"],
+  "implicitDependencies": ["chirimen-polyfill"],
   "// targets": "to see all targets run: nx show project polyfill-e2e --web",
   "targets": {}
 }
