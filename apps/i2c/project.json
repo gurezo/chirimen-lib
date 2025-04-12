@@ -1,7 +1,7 @@
 {
-  "name": "node-web-i2c",
+  "name": "chirimen-i2c",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/node-web-i2c/src",
+  "sourceRoot": "apps/i2c/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,12 +11,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/node-web-i2c",
+        "outputPath": "dist/apps/i2c",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/node-web-i2c/src/main.ts",
-        "tsConfig": "apps/node-web-i2c/tsconfig.app.json",
-        "assets": ["apps/node-web-i2c/src/assets"],
+        "main": "apps/i2c/src/main.ts",
+        "tsConfig": "apps/i2c/tsconfig.app.json",
+        "assets": ["apps/i2c/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -42,15 +42,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "node-web-i2c:build",
+        "buildTarget": "i2c:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "node-web-i2c:build:development"
+          "buildTarget": "i2c:build:development"
         },
         "production": {
-          "buildTarget": "node-web-i2c:build:production"
+          "buildTarget": "i2c:build:production"
         }
       }
     },
