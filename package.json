@@ -1,5 +1,5 @@
 {
-  "name": "@chirimen-lib/source",
+  "name": "chirimen-lib",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
