@@ -1,7 +1,7 @@
 {
-  "name": "node-web-gpio",
+  "name": "chirimen-gpio",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/node-web-gpio/src",
+  "sourceRoot": "apps/gpio/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,12 +11,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/node-web-gpio",
+        "outputPath": "dist/apps/gpio",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/node-web-gpio/src/main.ts",
-        "tsConfig": "apps/node-web-gpio/tsconfig.app.json",
-        "assets": ["apps/node-web-gpio/src/assets"],
+        "main": "apps/gpio/src/main.ts",
+        "tsConfig": "apps/gpio/tsconfig.app.json",
+        "assets": ["apps/gpio/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -42,15 +42,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "node-web-gpio:build",
+        "buildTarget": "gpio:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "node-web-gpio:build:development"
+          "buildTarget": "gpio:build:development"
         },
         "production": {
-          "buildTarget": "node-web-gpio:build:production"
+          "buildTarget": "gpio:build:production"
         }
       }
     },

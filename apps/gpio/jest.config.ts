@@ -6,5 +6,5 @@ export default {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/node-web-gpio',
+  coverageDirectory: '../../coverage/apps/gpio',
 };
