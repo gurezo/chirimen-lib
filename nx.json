@@ -34,23 +34,13 @@
       }
     },
     {
-      "plugin": "@nx/playwright/plugin",
-      "options": {
-        "targetName": "e2e"
-      }
-    },
-    {
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
-      },
-      "exclude": ["apps/gpio-e2e/**/*", "apps/node-web-i2c-e2e/**/*"]
+      }
     }
   ],
   "targetDefaults": {
-    "e2e-ci--**/*": {
-      "dependsOn": ["^build"]
-    },
     "@nx/esbuild:esbuild": {
       "cache": true,
       "dependsOn": ["^build"],
@@ -66,8 +56,7 @@
     "@nx/web:application": {
       "style": "scss",
       "linter": "eslint",
-      "unitTestRunner": "vitest",
-      "e2eTestRunner": "playwright"
+      "unitTestRunner": "vitest"
     }
   },
   "release": {
