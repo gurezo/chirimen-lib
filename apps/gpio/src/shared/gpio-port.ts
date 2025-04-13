@@ -1,6 +1,11 @@
+import {
+  InvalidAccessError,
+  OperationError,
+  parseUint16,
+  PortName,
+} from '@chirimen/shared';
 import { EventEmitter } from 'node:events';
 import { GpioOffset } from './constants';
-import { InvalidAccessError, OperationError } from './errors';
 import { GPIOPortFS } from './gpio-port-fs';
 import { GPIOPortPolling } from './gpio-port-polling';
 import {
@@ -9,9 +14,7 @@ import {
   GPIOChangeEventHandler,
   GPIOValue,
   PinName,
-  PortName,
 } from './types';
-import { parseUint16 } from './utils';
 
 /**
  * GPIO ポート

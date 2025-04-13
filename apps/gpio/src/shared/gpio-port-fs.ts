@@ -1,7 +1,7 @@
-import { promises as fs } from 'node:fs';
+import { InvalidAccessError, OperationError } from '@chirimen/shared';
+import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { SysfsGPIOPath } from './constants';
-import { InvalidAccessError, OperationError } from './errors';
 import { DirectionMode, GPIOValue } from './types';
 
 /**
@@ -25,7 +25,7 @@ export class GPIOPortFS {
    */
   async isExported(): Promise<boolean> {
     try {
-      await fs.access(path.join(SysfsGPIOPath, this._portName));
+      await fs.promises.access(path.join(SysfsGPIOPath, this._portName));
       return true;
     } catch {
       return false;
@@ -39,7 +39,7 @@ export class GPIOPortFS {
    */
   async export(portNumber: number): Promise<void> {
     try {
-      await fs.writeFile(
+      await fs.promises.writeFile(
         path.join(SysfsGPIOPath, 'export'),
         String(portNumber)
       );
@@ -55,7 +55,7 @@ export class GPIOPortFS {
    */
   async unexport(portNumber: number): Promise<void> {
     try {
-      await fs.writeFile(
+      await fs.promises.writeFile(
         path.join(SysfsGPIOPath, 'unexport'),
         String(portNumber)
       );
@@ -75,7 +75,7 @@ export class GPIOPortFS {
     }
 
     try {
-      await fs.writeFile(
+      await fs.promises.writeFile(
         path.join(SysfsGPIOPath, this._portName, 'direction'),
         direction
       );
@@ -90,7 +90,7 @@ export class GPIOPortFS {
    */
   async readValue(): Promise<GPIOValue> {
     try {
-      const value = await fs.readFile(
+      const value = await fs.promises.readFile(
         path.join(SysfsGPIOPath, this._portName, 'value'),
         'utf8'
       );
@@ -107,7 +107,7 @@ export class GPIOPortFS {
    */
   async writeValue(value: GPIOValue): Promise<void> {
     try {
-      await fs.writeFile(
+      await fs.promises.writeFile(
         path.join(SysfsGPIOPath, this._portName, 'value'),
         String(value)
       );

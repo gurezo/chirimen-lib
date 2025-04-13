@@ -1,7 +1,7 @@
+import { sleep } from '@chirimen/shared';
 import { GPIOAccess } from './shared/gpio-access';
 import { GPIOPort } from './shared/gpio-port';
 import { GPIOPortMap } from './shared/gpio-port-map';
-import { sleep } from './shared/utils';
 
 /**
  * GPIO アクセス要求処理

@@ -18,7 +18,8 @@
     "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@chirimen/shared": ["../../libs/shared/src"]
     }
   },
   "include": ["src"],

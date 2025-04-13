@@ -1,8 +1,8 @@
+import { OperationError } from '@chirimen/shared';
 import { I2CAccess } from './shared/i2c-access';
 import { I2CPort } from './shared/i2c-port';
 import { I2CPortMap } from './shared/i2c-port-map';
 import { I2CSlaveDevice } from './shared/i2c-slave-device';
-import { OperationError } from './shared/operation-error';
 
 /**
  * I2CAccess インスタンス生成処理

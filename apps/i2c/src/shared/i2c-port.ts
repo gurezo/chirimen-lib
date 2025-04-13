@@ -1,7 +1,7 @@
+import { OperationError, PortNumber } from '@chirimen/shared';
 import { openPromisified } from 'i2c-bus';
 import { I2CSlaveDevice } from './i2c-slave-device';
-import { OperationError } from './operation-error';
-import { I2CSlaveAddress, PortNumber, parseUint16 } from './types';
+import { I2CSlaveAddress, parseUint16 } from './types';
 
 /**
  * I2CPort クラス

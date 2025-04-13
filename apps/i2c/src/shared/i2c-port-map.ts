@@ -1,5 +1,6 @@
+import { PortName, PortNumber } from '@chirimen/shared';
 import { I2CPort } from './i2c-port';
-import { PortName, PortNumber, parseUint16 } from './types';
+import { parseUint16 } from './types';
 
 /** Different from Web I2C API specification. */
 export class I2CPortMap extends Map<PortNumber, I2CPort> {

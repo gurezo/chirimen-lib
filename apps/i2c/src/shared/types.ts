@@ -19,9 +19,5 @@ export function parseUint16(parseString: string) {
   else throw new RangeError(`Must be between 0 and ${Uint16Max}.`);
 }
 
-/** ポート番号 */
-export type PortNumber = number;
-/** ポート名 */
-export type PortName = string;
 /** I2C Slave アドレス */
 export type I2CSlaveAddress = number;

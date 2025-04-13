@@ -1,9 +1,5 @@
 import { GPIOPort } from './gpio-port';
 
-/** ポート番号 */
-export type PortNumber = number;
-/** ポート名 */
-export type PortName = string;
 /** ピン名 */
 export type PinName = string;
 

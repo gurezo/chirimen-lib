@@ -1,6 +1,7 @@
 /// <reference types='vitest' />
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -17,6 +18,9 @@ export default defineConfig({
   plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+    alias: {
+      '@chirimen/shared': path.resolve(__dirname, '../../libs/shared/src'),
+    },
   },
   // Uncomment this if you are using workers.
   // worker: {
@@ -36,6 +40,7 @@ export default defineConfig({
         format: 'iife',
         name: 'polyfill',
       },
+      external: ['@chirimen/shared'],
     },
   },
   test: {
