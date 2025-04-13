@@ -1,5 +1,5 @@
 import { createGPIOAccess } from '@chirimen/gpio';
-import { createI2CPort } from './shared/i2c-port';
+import { createI2CPort } from '@chirimen/i2c';
 import { createRouter } from './shared/router';
 
 const serverURL = 'wss://localhost:33330/';

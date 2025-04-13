@@ -19,7 +19,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@chirimen/shared": ["../../libs/shared/src"]
+      "@chirimen/shared": ["../../libs/shared/src"],
+      "@chirimen/gpio": ["../../libs/gpio/src"],
+      "@chirimen/i2c": ["../../libs/i2c/src"]
     }
   },
   "include": ["src"],

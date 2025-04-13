@@ -1,13 +1,13 @@
-import { I2CPortMap } from './i2c-port-map';
+import { I2CAccess, I2CPortMap } from './types';
 
 /**
  * I2CAccess クラス
  */
-export class I2CAccess {
+export class I2CAccessManager implements I2CAccess {
   private readonly _ports: I2CPortMap;
 
   /**
-   * Creates an instance of GPIOAccess.
+   * Creates an instance of I2CAccess.
    * @param ports ポート番号
    */
   constructor(ports?: I2CPortMap) {

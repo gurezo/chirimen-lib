@@ -21,6 +21,7 @@ export default defineConfig({
     alias: {
       '@chirimen/shared': path.resolve(__dirname, '../../libs/shared/src'),
       '@chirimen/gpio': path.resolve(__dirname, '../../libs/gpio/src'),
+      '@chirimen/i2c': path.resolve(__dirname, '../../libs/i2c/src'),
     },
   },
   // Uncomment this if you are using workers.
@@ -41,7 +42,7 @@ export default defineConfig({
         format: 'iife',
         name: 'polyfill',
       },
-      external: ['@chirimen/shared', '@chirimen/gpio'],
+      external: ['@chirimen/shared', '@chirimen/gpio', '@chirimen/i2c'],
     },
   },
   test: {

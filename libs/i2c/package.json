@@ -1,11 +1,11 @@
 {
-  "name": "@chirimen-lib/i2c",
+  "name": "@chirimen/i2c",
   "version": "0.1.0",
   "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
-    "@chirimen-lib/shared": "^0.1.0"
+    "@chirimen/shared": "^0.1.0"
   },
   "peerDependencies": {}
 }
