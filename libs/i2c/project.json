@@ -19,7 +19,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/i2c",
-        "main": "libs/i2c/src/index.ts",
+        "main": "libs/i2c/src/lib/index.ts",
         "tsConfig": "libs/i2c/tsconfig.lib.json",
         "assets": ["libs/i2c/*.md"]
       }

@@ -1,11 +1,18 @@
 {
-  "name": "@chirimen-lib/gpio",
-  "version": "0.1.0",
+  "name": "@chirimen/gpio",
+  "version": "0.0.1",
   "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    }
+  },
   "dependencies": {
-    "@chirimen-lib/shared": "^0.1.0"
+    "@chirimen/shared": "workspace:*"
   },
   "peerDependencies": {}
 }

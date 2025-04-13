@@ -11,6 +11,11 @@
     }
   ],
   "compilerOptions": {
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@chirimen/shared": ["../../libs/shared/src"],
+      "@chirimen/i2c": ["../../libs/i2c/src"]
+    }
   }
 }

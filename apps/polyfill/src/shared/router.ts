@@ -1,36 +1,40 @@
-import { errLog, infoLog } from './logger';
-import { ConnectionCallback, EventCallback } from './types';
+import { errLog, infoLog } from '@chirimen/shared';
+import { Router as RouterType } from './types';
 
-export class WebSocketManager {
-  private wss: WebSocket | null = null;
-  private queue: Map<number, (data: Uint8Array) => void> = new Map();
-  private onevents: Map<number, EventCallback> = new Map();
-  private waitQueue: ConnectionCallback[] = [];
-  private status = 0; // 0: init 1: wait connection 2: connected
-  private session = 0;
+export type Router = RouterType;
 
-  constructor(private serverURL: string) {}
+export function createRouter(serverURL: string): Router {
+  const router = {
+    wss: null,
+    queue: new Map(),
+    onevents: new Map(),
+    waitQueue: [],
+    status: 0,
+    session: 0,
+  } as Router;
 
-  init(): void {
-    infoLog('WebSocketManager.init()');
+  router.init = function (serverURL: string): void {
+    infoLog('bone.init()');
     this.waitQueue = [];
     this.queue = new Map();
     this.onevents = new Map();
-    this.wss = new WebSocket(this.serverURL);
+    this.wss = new WebSocket(serverURL);
     this.wss.binaryType = 'arraybuffer';
     this.status = 1;
 
     this.wss.onopen = () => {
       infoLog('onopen');
-      for (const callback of this.waitQueue) {
-        callback(true);
+      for (let cnt = 0; cnt < this.waitQueue.length; cnt++) {
+        if (typeof this.waitQueue[cnt] === 'function') {
+          this.waitQueue[cnt](true);
+        }
       }
       this.status = 2;
       this.waitQueue = [];
     };
 
-    this.wss.onerror = () => {
-      errLog('WebSocket connection error');
+    this.wss.onerror = (error) => {
+      errLog(error);
       errLog(
         [
           'Node.jsプロセスとの接続に失敗しました。',
@@ -38,10 +42,11 @@ export class WebSocketManager {
           'https://r.chirimen.org/tutorial',
         ].join('\n')
       );
-
       const length = this.waitQueue ? this.waitQueue.length : 0;
-      for (let i = 0; i < length; i++) {
-        this.waitQueue[i](false);
+      for (let cnt = 0; cnt < length; cnt++) {
+        if (typeof this.waitQueue[cnt] === 'function') {
+          this.waitQueue[cnt](false);
+        }
       }
       this.status = 0;
       this.waitQueue = [];
@@ -50,21 +55,20 @@ export class WebSocketManager {
     this.wss.onmessage = (mes) => {
       const buffer = new Uint8Array(mes.data);
       infoLog('on message:' + buffer);
-      if (buffer[0] === 1) {
+      if (buffer[0] == 1) {
         this.receive(buffer);
-      } else if (buffer[0] === 2) {
+      } else if (buffer[0] == 2) {
         this.onEvent(buffer);
       }
     };
-  }
+  };
 
-  send(func: number, data: Uint8Array): Promise<Uint8Array> {
+  router.send = function (func: number, data: Uint8Array): Promise<number[]> {
     return new Promise((resolve, reject) => {
       if (!(data instanceof Uint8Array)) {
         reject('type error: Please using with Uint8Array buffer.');
         return;
       }
-
       const length = data.length + 4;
       const buf = new Uint8Array(length);
 
@@ -73,27 +77,22 @@ export class WebSocketManager {
       buf[2] = this.session >> 8; // session MSB
       buf[3] = func;
 
-      for (let i = 0; i < data.length; i++) {
-        buf[4 + i] = data[i];
+      for (let cnt = 0; cnt < data.length; cnt++) {
+        buf[4 + cnt] = data[cnt];
       }
-
       infoLog('send message:' + buf);
       this.queue.set(this.session, (data) => {
         resolve(data);
       });
-
-      if (this.wss) {
-        this.wss.send(buf);
-      }
-
+      this.wss?.send(buf);
       this.session++;
       if (this.session > 0xffff) {
         this.session = 0;
       }
     });
-  }
+  };
 
-  private receive(mes: Uint8Array): void {
+  router.receive = function (mes: Uint8Array): void {
     if (!(mes instanceof Uint8Array)) {
       errLog(new TypeError('Please using with Uint8Array buffer.'));
       errLog(
@@ -106,16 +105,15 @@ export class WebSocketManager {
       );
       return;
     }
-
     const session = (mes[1] & 0x00ff) | (mes[2] << 8);
     const func = this.queue.get(session);
     if (typeof func === 'function') {
       infoLog('result');
-      const data: number[] = [];
-      for (let i = 0; i < mes.length - 4; i++) {
-        data.push(mes[4 + i]);
+      const data = [];
+      for (let cnt = 0; cnt < mes.length - 4; cnt++) {
+        data.push(mes[4 + cnt]);
       }
-      func(new Uint8Array(data));
+      func(data);
       this.queue.delete(session);
     } else {
       errLog(new TypeError('session=' + session + ' func=' + func));
@@ -128,19 +126,23 @@ export class WebSocketManager {
         )
       );
     }
-  }
+  };
 
-  registerEvent(f: number, port: number, func: EventCallback): void {
+  router.registerEvent = function (
+    f: number,
+    port: number,
+    func: (data: Uint8Array) => void
+  ): void {
     const key = (f << 8) | port;
     this.onevents.set(key, func);
-  }
+  };
 
-  removeEvent(f: number, port: number): void {
+  router.removeEvent = function (f: number, port: number): void {
     const key = (f << 8) | port;
     this.onevents.delete(key);
-  }
+  };
 
-  private onEvent(data: Uint8Array): void {
+  router.onEvent = function (data: Uint8Array): void {
     if (!(data instanceof Uint8Array)) {
       errLog(new TypeError('Please using with Uint8Array buffer.'));
       errLog(
@@ -154,31 +156,23 @@ export class WebSocketManager {
       return;
     }
 
-    // [0] Change Callback (2)
-    // [1] session id LSB (0)
-    // [2] session id MSB (0)
-    // [3] function id (0x14)
-    // [4] Port Number
-    // [5] Value (0:LOW 1:HIGH)
-    let key = data[3];
-    key = (key << 8) | data[4];
-
+    const key = (data[3] << 8) | data[4];
     const func = this.onevents.get(key);
     if (typeof func === 'function') {
       infoLog('onevent');
       func(data);
     }
-  }
+  };
 
-  waitConnection(): Promise<void> {
+  router.waitConnection = function (): Promise<void> {
     return new Promise((resolve, reject) => {
-      if (this.status === 2) {
+      if (this.status == 2) {
         resolve();
-      } else if (this.status === 0) {
+      } else if (this.status == 0) {
         reject();
       } else {
         this.waitQueue.push((result) => {
-          if (result === true) {
+          if (result == true) {
             resolve();
           } else {
             reject();
@@ -186,5 +180,8 @@ export class WebSocketManager {
         });
       }
     });
-  }
+  };
+
+  router.init(serverURL);
+  return router;
 }

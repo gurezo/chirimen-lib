@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/apps/polyfill',
+  cacheDir: '../../node_modules/.vite/apps/gpio',
   server: {
     port: 4200,
     host: 'localhost',
@@ -21,28 +21,22 @@ export default defineConfig({
     alias: {
       '@chirimen/shared': path.resolve(__dirname, '../../libs/shared/src'),
       '@chirimen/gpio': path.resolve(__dirname, '../../libs/gpio/src'),
-      '@chirimen/i2c': path.resolve(__dirname, '../../libs/i2c/src'),
     },
   },
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
   build: {
-    outDir: '../../dist/apps/polyfill',
+    outDir: '../../dist/apps/gpio',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     rollupOptions: {
-      input: 'src/polyfill.ts',
+      input: 'src/index.ts',
       output: {
-        entryFileNames: 'polyfill.js',
-        format: 'iife',
-        name: 'polyfill',
+        entryFileNames: 'index.js',
+        format: 'es',
       },
-      external: ['@chirimen/shared', '@chirimen/gpio', '@chirimen/i2c'],
+      external: ['@chirimen/shared', '@chirimen/gpio', 'express'],
     },
   },
   test: {
@@ -50,10 +44,5 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    reporters: ['default'],
-    coverage: {
-      reportsDirectory: '../../coverage/apps/polyfill',
-      provider: 'v8',
-    },
   },
 });

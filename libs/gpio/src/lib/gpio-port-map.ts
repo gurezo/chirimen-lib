@@ -1,7 +1,7 @@
-import { GPIOPort } from './gpio-port';
+import { PortNumber } from '@chirimen/shared';
+import { GPIOPort } from './types';
 
-export class GPIOPortMap extends Map<number, GPIOPort> {
-  constructor(entries?: readonly (readonly [number, GPIOPort])[]) {
-    super(entries);
-  }
-}
+/**
+ * Different from Web GPIO API specification.
+ */
+export class GPIOPortMap extends Map<PortNumber, GPIOPort> {}

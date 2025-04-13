@@ -1,18 +1,18 @@
-import { GPIOAccess, GPIOPort, GPIOPortMap } from '@chirimen-lib/gpio';
-import { sleep } from '@chirimen-lib/shared';
+import { GPIOPort, GPIOPortMap, NodeGPIOAccess } from '@chirimen/gpio';
+import { sleep } from '@chirimen/shared';
 
 /**
  * GPIO アクセス要求処理
  * @return GPIO アクセス
  */
-export async function requestGPIOAccess(): Promise<GPIOAccess> {
+export async function requestGPIOAccess(): Promise<NodeGPIOAccess> {
   const ports = new GPIOPortMap();
-  const access = new GPIOAccess(ports);
+  const access = new NodeGPIOAccess(ports);
 
-  // NOTE: For testing.
+  // NOTE: Wait for GPIO initialization.
   await sleep(100);
 
   return access;
 }
 
-export { GPIOAccess, GPIOPort };
+export { NodeGPIOAccess as GPIOAccess, GPIOPort, GPIOPortMap };

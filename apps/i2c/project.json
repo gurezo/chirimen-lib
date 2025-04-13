@@ -14,7 +14,7 @@
         "outputPath": "dist/apps/i2c",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/i2c/src/main.ts",
+        "main": "apps/i2c/src/index.ts",
         "tsConfig": "apps/i2c/tsconfig.app.json",
         "assets": ["apps/i2c/src/assets"],
         "generatePackageJson": true,

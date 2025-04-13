@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@chirimen-lib/gpio": ["libs/gpio/src/index.ts"],
-      "@chirimen-lib/i2c": ["libs/i2c/src/index.ts"],
-      "@chirimen-lib/shared": ["libs/shared/src/index.ts"]
+      "@chirimen/gpio": ["libs/gpio/src/index.ts"],
+      "@chirimen/i2c": ["libs/i2c/src/index.ts"],
+      "@chirimen/shared": ["libs/shared/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

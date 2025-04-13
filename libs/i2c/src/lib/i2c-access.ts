@@ -1,13 +1,24 @@
-import { I2CPortMap } from './i2c-port-map';
+import { I2CAccess, I2CPortMap } from './types';
 
-export class I2CAccess {
-  constructor(private readonly _ports: I2CPortMap) {}
+/**
+ * I2CAccess クラス
+ */
+export class I2CAccessManager implements I2CAccess {
+  private readonly _ports: I2CPortMap;
 
-  public port(portNumber: number) {
-    return this._ports.get(portNumber);
+  /**
+   * Creates an instance of I2CAccess.
+   * @param ports ポート番号
+   */
+  constructor(ports?: I2CPortMap) {
+    this._ports = ports == null ? new I2CPortMap() : ports;
   }
 
-  public getAllPorts() {
+  /**
+   * ポート情報取得処理
+   * @return 現在のポート情報
+   */
+  get ports(): I2CPortMap {
     return this._ports;
   }
 }
