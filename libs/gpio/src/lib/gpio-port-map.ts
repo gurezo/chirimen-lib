@@ -1,5 +1,5 @@
 import { PortNumber } from '@chirimen/shared';
-import { GPIOPort } from './gpio-port';
+import { GPIOPort } from './types';
 
 /**
  * Different from Web GPIO API specification.

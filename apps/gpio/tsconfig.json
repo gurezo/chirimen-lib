@@ -1,20 +1,19 @@
 {
   "extends": "../../tsconfig.base.json",
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ],
   "compilerOptions": {
-    "esModuleInterop": true,
+    "outDir": "../../dist/out-tsc",
+    "declaration": true,
+    "types": ["node"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ES2020",
     "baseUrl": ".",
     "paths": {
-      "@chirimen/shared": ["../../libs/shared/src"]
-    }
-  }
+      "@chirimen/shared": ["../../libs/shared/src"],
+      "@chirimen/gpio": ["../../libs/gpio/src"]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

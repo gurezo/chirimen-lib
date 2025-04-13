@@ -1,8 +1,12 @@
 {
   "name": "@chirimen/polyfill",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
-  "main": "./dist/polyfill.js",
-  "types": "./dist/polyfill.d.ts",
-  "sideEffects": false
+  "main": "./src/polyfill.ts",
+  "types": "./src/polyfill.d.ts",
+  "dependencies": {
+    "@chirimen/shared": "workspace:*",
+    "@chirimen/gpio": "workspace:*"
+  },
+  "peerDependencies": {}
 }

@@ -1,4 +1,4 @@
-import { createGPIOAccess } from './shared/gpio-access';
+import { createGPIOAccess } from '@chirimen/gpio';
 import { createI2CPort } from './shared/i2c-port';
 import { createRouter } from './shared/router';
 
