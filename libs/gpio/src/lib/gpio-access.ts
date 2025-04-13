@@ -2,9 +2,9 @@ import { EventEmitter } from 'node:events';
 import { GPIOAccess, GPIOPortMap } from './types';
 
 /**
- * Router interface for polyfill implementation
+ * Router interface for GPIO access implementation
  */
-export interface Router {
+export interface GPIORouter {
   waitConnection(): Promise<void>;
   send(command: number, data: Uint8Array): Promise<void>;
 }
@@ -46,7 +46,7 @@ export class NodeGPIOAccess extends EventEmitter implements GPIOAccess {
 /**
  * GPIO Access implementation for Polyfill
  */
-export function createGPIOAccess(router: Router): GPIOAccess {
+export function createGPIOAccess(router: GPIORouter): GPIOAccess {
   const ports = new GPIOPortMap();
 
   const gpioAccess: GPIOAccess = {
