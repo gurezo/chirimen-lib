@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
-import { Uint16Max } from './constants';
-import { errLog, infoLog, parseUint16, sleep } from './utils';
+import { errLog, infoLog } from './logger';
+import { Uint16Max } from './number-constants';
+import { parseUint16 } from './number-utils';
+import { sleep } from './promise-utils';
 
 describe('utils', () => {
   describe('parseUint16', () => {

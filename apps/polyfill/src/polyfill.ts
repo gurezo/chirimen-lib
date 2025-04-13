@@ -1,9 +1,4 @@
-import { createGPIOAccess } from '@chirimen/gpio';
-import { createI2CPort } from '@chirimen/i2c';
-import { createRouter } from './shared/router';
+import { gpioAccess } from './gpio-access';
+import { i2cPort } from './i2c-port';
 
-const serverURL = 'wss://localhost:33330/';
-const router = createRouter(serverURL);
-
-export const gpioAccess = createGPIOAccess(router);
-export const i2cPort = createI2CPort(router, 0);
+export { gpioAccess, i2cPort };
