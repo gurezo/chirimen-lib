@@ -3,12 +3,5 @@
   "version": "0.0.1",
   "type": "module",
   "main": "./src/polyfill.ts",
-  "types": "./src/polyfill.d.ts",
-  "dependencies": {
-    "@chirimen/shared": "workspace:*"
-  },
-  "peerDependencies": {
-    "@chirimen/gpio": "workspace:*",
-    "@chirimen/i2c": "workspace:*"
-  }
+  "types": "./src/polyfill.d.ts"
 }
