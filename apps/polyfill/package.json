@@ -1,0 +1,8 @@
+{
+  "name": "@chirimen/polyfill",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/polyfill.js",
+  "types": "./dist/polyfill.d.ts",
+  "sideEffects": false
+}

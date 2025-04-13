@@ -15,6 +15,9 @@ export default defineConfig({
     host: 'localhost',
   },
   plugins: [nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+  resolve: {
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+  },
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
@@ -27,7 +30,7 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
     rollupOptions: {
-      input: 'src/typescript/index.ts',
+      input: 'src/polyfill.ts',
       output: {
         entryFileNames: 'polyfill.js',
         format: 'iife',
