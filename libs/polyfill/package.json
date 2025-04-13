@@ -1,0 +1,21 @@
+{
+  "name": "@chirimen/polyfill",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js",
+      "require": "./src/index.js"
+    }
+  },
+  "dependencies": {
+    "@chirimen/shared": "workspace:*",
+    "@chirimen/gpio": "workspace:*",
+    "@chirimen/i2c": "workspace:*",
+    "@chirimen/router": "workspace:*"
+  },
+  "peerDependencies": {}
+}

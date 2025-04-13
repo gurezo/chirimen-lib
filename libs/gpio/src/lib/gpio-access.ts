@@ -1,13 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { GPIOAccess, GPIOPortMap } from './types';
-
-/**
- * Router interface for GPIO access implementation
- */
-export interface GPIORouter {
-  waitConnection(): Promise<void>;
-  send(command: number, data: Uint8Array): Promise<void>;
-}
+import { GPIOAccess, GPIOPortMap, GPIORouter } from './types';
 
 /**
  * GPIO Access implementation for Node.js
@@ -36,7 +28,7 @@ export class NodeGPIOAccess extends EventEmitter implements GPIOAccess {
 
   async unexportAll(): Promise<void> {
     await Promise.all(
-      [...this.ports.values()].map((port) =>
+      Array.from(this.ports.values()).map((port) =>
         port.exported ? port.unexport() : undefined
       )
     );

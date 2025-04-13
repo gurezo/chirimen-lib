@@ -5,8 +5,10 @@
   "main": "./src/polyfill.ts",
   "types": "./src/polyfill.d.ts",
   "dependencies": {
-    "@chirimen/shared": "workspace:*",
-    "@chirimen/gpio": "workspace:*"
+    "@chirimen/shared": "workspace:*"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "@chirimen/gpio": "workspace:*",
+    "@chirimen/i2c": "workspace:*"
+  }
 }

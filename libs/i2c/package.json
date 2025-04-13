@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
-    "@chirimen/shared": "^0.1.0"
+    "@chirimen/shared": "workspace:*"
   },
   "peerDependencies": {}
 }
