@@ -1,7 +1,4 @@
-/**
- * Uint16 Max サイズ
- */
-export const Uint16Max = 65535;
+import { Uint16Max } from './constants';
 
 /**
  * Uint16型変換処理
