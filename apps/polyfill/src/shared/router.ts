@@ -1,5 +1,4 @@
-import { errLog, infoLog } from '@chirimen/shared';
-import { Router as RouterType } from './types';
+import { errLog, infoLog, Router as RouterType } from '@chirimen/shared';
 
 export type Router = RouterType;
 
