@@ -1,4 +1,4 @@
-export interface Router {
+export interface WebSocketRouter {
   wss: WebSocket | null;
   queue: Map<number, (data: number[]) => void>;
   onevents: Map<number, (data: Uint8Array) => void>;
