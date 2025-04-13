@@ -3,9 +3,5 @@
   "version": "0.1.0",
   "type": "module",
   "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "dependencies": {
-    "@chirimen/shared": "workspace:*"
-  },
-  "peerDependencies": {}
+  "types": "./src/index.d.ts"
 }

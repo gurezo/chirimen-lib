@@ -3,14 +3,5 @@
   "version": "0.0.1",
   "type": "module",
   "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "dependencies": {
-    "@chirimen/shared": "workspace:*",
-    "@chirimen/gpio": "workspace:*",
-    "express": "^4.18.2"
-  },
-  "peerDependencies": {},
-  "workspaces": [
-    "../../libs/*"
-  ]
+  "types": "./src/index.d.ts"
 }
