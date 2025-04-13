@@ -24,6 +24,14 @@
         "assets": ["libs/i2c/*.md"]
       }
     },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "coverage/libs/i2c"
+      }
+    },
     "nx-release-publish": {
       "options": {
         "packageRoot": "dist/{projectRoot}"
