@@ -1,0 +1,21 @@
+{
+  "name": "gpio",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "node/gpio/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/node/gpio",
+        "main": "node/gpio/src/index.ts",
+        "tsConfig": "node/gpio/tsconfig.lib.json",
+        "assets": ["node/gpio/*.md"],
+        "format": ["cjs"],
+        "generatePackageJson": true
+      }
+    }
+  }
+}

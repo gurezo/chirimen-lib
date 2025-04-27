@@ -1,0 +1,21 @@
+{
+  "name": "i2c",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "node/i2c/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/node/i2c",
+        "main": "node/i2c/src/index.ts",
+        "tsConfig": "node/i2c/tsconfig.lib.json",
+        "assets": ["node/i2c/*.md"],
+        "format": ["cjs"],
+        "generatePackageJson": true
+      }
+    }
+  }
+}
