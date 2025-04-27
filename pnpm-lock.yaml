@@ -20,7 +20,7 @@ importers:
       '@chirimen/router':
         specifier: workspace:*
         version: link:libs/router
-      '@chirimen/shared':
+      '@chirimen/core':
         specifier: workspace:*
         version: link:libs/shared
       axios:
