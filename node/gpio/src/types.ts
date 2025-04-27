@@ -1,15 +1,7 @@
-/** ポート番号 */
-export type PortNumber = number;
-/** ポート名 */
-export type PortName = string;
+import { DirectionMode, GPIOValue, PortName, PortNumber } from '@chirimen/core';
+
 /** ピン名 */
 export type PinName = string;
-
-/** 入出力方向 */
-export type DirectionMode = 'in' | 'out';
-
-/** GPIO 値 0: LOW / 1: HIGH */
-export type GPIOValue = 0 | 1;
 
 /**
  * GPIO チェンジイベント
@@ -28,3 +20,5 @@ export interface GPIOChangeEventHandler {
   /** イベント */
   (event: GPIOChangeEvent): void;
 }
+
+export { DirectionMode, GPIOValue, PortName, PortNumber };

@@ -6,18 +6,13 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/esbuild:esbuild",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "../../dist/node/gpio",
+        "outputPath": "dist/node/gpio",
         "main": "node/gpio/src/index.ts",
         "tsConfig": "node/gpio/tsconfig.lib.json",
-        "assets": ["node/gpio/*.md"],
-        "format": ["cjs"],
-        "generatePackageJson": true,
-        "bundle": true,
-        "metafile": true,
-        "platform": "node"
+        "assets": ["node/gpio/*.md"]
       }
     }
   }

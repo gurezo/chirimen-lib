@@ -1,3 +1,7 @@
+import { AccessError, ArgumentError, PortOperationError } from '@chirimen/core';
+
+export { AccessError, ArgumentError, PortOperationError };
+
 /**
  * Invalid Access Error
  */
