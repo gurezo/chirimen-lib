@@ -9,12 +9,15 @@
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/node/gpio",
+        "outputPath": "../../dist/node/gpio",
         "main": "node/gpio/src/index.ts",
         "tsConfig": "node/gpio/tsconfig.lib.json",
         "assets": ["node/gpio/*.md"],
         "format": ["cjs"],
-        "generatePackageJson": true
+        "generatePackageJson": true,
+        "bundle": true,
+        "metafile": true,
+        "platform": "node"
       }
     }
   }
