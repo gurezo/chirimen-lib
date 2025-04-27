@@ -16,9 +16,9 @@
     "baseUrl": ".",
     "downlevelIteration": true,
     "paths": {
-      "@chirimen/gpio": ["libs/gpio/src/index.ts"],
-      "@chirimen/i2c": ["libs/i2c/src/index.ts"],
-      "@chirimen/shared": ["libs/shared/src/index.ts"]
+      "@chirimen/core": ["./libs/core/src/index.ts"],
+      "@chirimen/gpio": ["./node/gpio/src/index.ts"],
+      "@chirimen/i2c": ["./node/i2c/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

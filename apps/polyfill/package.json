@@ -1,7 +1,0 @@
-{
-  "name": "@chirimen/polyfill",
-  "version": "0.0.1",
-  "type": "module",
-  "main": "./src/polyfill.ts",
-  "types": "./src/polyfill.d.ts"
-}

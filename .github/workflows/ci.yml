@@ -14,7 +14,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           fetch-tags: true
@@ -27,22 +27,26 @@ jobs:
       # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="build"
 
       # Setup pnpm
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
           version: 9.0.0
           run_install: false
 
-      # Cache node_modules
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
 
       - name: Install dependencies
         run: |
           pnpm config set store-dir .pnpm-store
           pnpm config set node-linker hoisted
-          pnpm install --frozen-lockfile --no-verify-store-integrity
+          pnpm install --no-frozen-lockfile
+
+      # Cache node_modules
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Clean workspace
+        run: npx nx reset
 
       # - name: Build workspace
       #   run: |
