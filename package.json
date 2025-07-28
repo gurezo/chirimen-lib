@@ -25,6 +25,7 @@
     "esbuild": "^0.19.2",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "10.1.8",
+    "jiti": "2.4.2",
     "jsdom": "~22.1.0",
     "nx": "21.3.7",
     "prettier": "^2.6.2",
