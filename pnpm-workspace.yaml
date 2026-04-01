@@ -2,6 +2,8 @@ packages:
   - libs/*
   - apps/*
 
+minimumReleaseAge: 3
+
 ignoredBuiltDependencies:
   - esbuild
   - nx
