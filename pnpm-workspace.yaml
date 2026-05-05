@@ -2,7 +2,7 @@ packages:
   - libs/*
   - apps/*
 
-# minimumReleaseAge: 10080
+minimumReleaseAge: 10080
 
 ignoredBuiltDependencies:
   - esbuild
