@@ -16,6 +16,14 @@
   "nxCloudId": "67f6c5a372440c73021f058e",
   "plugins": [
     {
+      "plugin": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        }
+      }
+    },
+    {
       "plugin": "@nx/vite/plugin",
       "options": {
         "buildTargetName": "build",
@@ -62,5 +70,8 @@
       "preVersionCommand": "npx nx run-many -t build"
     }
   },
-  "analytics": true
+  "analytics": true,
+  "affected": {
+    "legacy": true
+  }
 }

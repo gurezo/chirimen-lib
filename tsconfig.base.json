@@ -20,7 +20,11 @@
       "@chirimen/core": ["./libs/core/src/index.ts"],
       "@chirimen/gpio": ["./node/gpio/src/index.ts"],
       "@chirimen/i2c": ["./node/i2c/src/index.ts"]
-    }
+    },
+    "strict": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false
   },
   "exclude": ["node_modules", "tmp"]
 }
